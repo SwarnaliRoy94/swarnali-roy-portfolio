@@ -17,16 +17,18 @@ import {
   focusAreas,
   profile,
   projects,
-  skillGroups,
+  skillCategories,
+  skills,
   stats,
 } from "@/lib/portfolio-data";
+import { useMemo, useState } from "react";
 
 const navItems = [
   { label: "Home", href: "#top" },
   { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -98,6 +100,22 @@ function MiniChip({ children }: { children: React.ReactNode }) {
 
 export function PortfolioPage() {
   const reduceMotion = useReducedMotion();
+  const [activeSkillCategory, setActiveSkillCategory] = useState("all");
+  const visibleSkillGroups = useMemo(
+    () =>
+      skillCategories
+        .filter((category) => category.id !== "all")
+        .filter(
+          (category) =>
+            activeSkillCategory === "all" || category.id === activeSkillCategory,
+        )
+        .map((category) => ({
+          ...category,
+          skills: skills.filter((skill) => skill.category === category.id),
+        }))
+        .filter((category) => category.skills.length > 0),
+    [activeSkillCategory],
+  );
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_50%_0%,rgba(45,226,197,0.16),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(244,114,182,0.12),transparent_28%),linear-gradient(180deg,#fbfaf5,#f3f1e9)] text-slate-950 dark:bg-[radial-gradient(circle_at_50%_0%,rgba(45,226,197,0.14),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(168,85,247,0.14),transparent_28%),linear-gradient(180deg,#070b12,#020617_46%,#050816)] dark:text-white">
@@ -286,6 +304,106 @@ export function PortfolioPage() {
         </motion.section>
 
         <Section
+          description="A practical map of the tools I use to build mobile apps, responsive interfaces, API-driven features, and delivery workflows."
+          eyebrow="Capabilities"
+          id="skills"
+          title="Skills"
+        >
+          <div className="mb-10 flex flex-wrap gap-3">
+            {skillCategories.map((category) => {
+              const isActive = activeSkillCategory === category.id;
+
+              return (
+                <button
+                  aria-pressed={isActive}
+                  className={`rounded-full px-5 py-2 text-sm font-semibold capitalize transition focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-stone-50 dark:focus:ring-offset-slate-950 ${
+                    isActive
+                      ? "bg-teal-300 text-slate-950 shadow-[0_0_24px_rgba(45,226,197,0.18)]"
+                      : "border border-slate-300 bg-white/50 text-slate-600 hover:border-teal-400 hover:text-teal-700 dark:border-white/15 dark:bg-white/5 dark:text-slate-300 dark:hover:border-teal-300 dark:hover:text-teal-200"
+                  }`}
+                  key={category.id}
+                  onClick={() => setActiveSkillCategory(category.id)}
+                  type="button"
+                >
+                  {category.label}
+                </button>
+              );
+            })}
+          </div>
+
+          <motion.div className="grid items-stretch gap-4 md:grid-cols-2" layout>
+            {visibleSkillGroups.map((group, groupIndex) => (
+              <motion.article
+                className="card h-full p-5"
+                initial={{
+                  opacity: 0,
+                  y: reduceMotion ? 0 : 18,
+                }}
+                key={group.id}
+                layout
+                transition={{
+                  delay: groupIndex * 0.05,
+                  duration: 0.35,
+                  ease: "easeOut",
+                }}
+                viewport={{ once: true, margin: "-80px" }}
+                whileHover={reduceMotion ? undefined : { y: -4 }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+              >
+                <div className="mb-4 flex items-baseline justify-between gap-4">
+                  <h3 className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400">
+                    {group.label}
+                  </h3>
+                  <span className="text-xs font-medium text-teal-700 dark:text-teal-300">
+                    {group.skills.length} skills
+                  </span>
+                </div>
+
+                <div className="space-y-3.5">
+                  {group.skills.map((skill, skillIndex) => (
+                    <div key={skill.name}>
+                      <div className="flex items-baseline justify-between gap-4">
+                        <span className="text-sm font-medium text-slate-800 dark:text-slate-100">
+                          {skill.name}
+                        </span>
+                        <span className="font-mono text-xs text-slate-500 dark:text-slate-500">
+                          {skill.level}
+                        </span>
+                      </div>
+                      <div
+                        aria-label={`${skill.name} proficiency`}
+                        aria-valuemax={100}
+                        aria-valuemin={0}
+                        aria-valuenow={skill.level}
+                        className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-slate-200/80 dark:bg-white/10"
+                        role="progressbar"
+                      >
+                        <motion.div
+                          className="h-full rounded-full bg-linear-to-r from-[#B4A7D6] to-[#8BD5DD] shadow-[0_0_18px_rgba(139,213,221,0.24)]"
+                          initial={{ width: 0 }}
+                          transition={{
+                            delay:
+                              groupIndex * 0.05 +
+                              Math.min(skillIndex * 0.025, 0.16),
+                            duration: 0.7,
+                            ease: "easeOut",
+                          }}
+                          viewport={{ once: true }}
+                          whileInView={{ width: `${skill.level}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </Section>
+
+        <Section
           description="Building and shipping production mobile apps, frontend platforms, and release-ready product experiences."
           eyebrow="Track record"
           id="experience"
@@ -390,38 +508,6 @@ export function PortfolioPage() {
                     ))}
                   </div>
                 </motion.article>
-              );
-            })}
-          </div>
-        </Section>
-
-        <Section
-          description="Grouped for quick scanning by recruiters and engineering leads."
-          eyebrow="Capabilities"
-          id="skills"
-          title="Skills"
-        >
-          <div className="grid gap-4 lg:grid-cols-3">
-            {skillGroups.map((group) => {
-              const Icon = group.icon;
-
-              return (
-                <article className="card p-5" key={group.title}>
-                  <div className="mb-5 flex items-center gap-3">
-                    <Icon
-                      aria-hidden="true"
-                      className="size-5 text-teal-700 dark:text-teal-300"
-                    />
-                    <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
-                      {group.title}
-                    </h3>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {group.skills.map((skill) => (
-                      <Chip key={skill}>{skill}</Chip>
-                    ))}
-                  </div>
-                </article>
               );
             })}
           </div>

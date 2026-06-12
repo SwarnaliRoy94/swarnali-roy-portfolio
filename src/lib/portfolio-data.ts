@@ -1,6 +1,5 @@
 import {
   Bot,
-  Braces,
   BriefcaseBusiness,
   Code2,
   GraduationCap,
@@ -191,49 +190,39 @@ export const projects = [
   },
 ];
 
-export const skillGroups = [
-  {
-    title: "Frontend & mobile",
-    icon: Code2,
-    skills: [
-      "React Native",
-      "React.js",
-      "Next.js",
-      "TypeScript",
-      "JavaScript",
-      "Tailwind CSS",
-      "Responsive UI",
-      "Figma-to-code",
-    ],
-  },
-  {
-    title: "Data & backend",
-    icon: Braces,
-    skills: [
-      "REST APIs",
-      "GraphQL",
-      "Node.js",
-      "NestJS",
-      "PostgreSQL",
-      "MySQL",
-      "Firebase",
-      "RTK Query",
-    ],
-  },
-  {
-    title: "Delivery & tooling",
-    icon: Workflow,
-    skills: [
-      "Git",
-      "CI/CD",
-      "Vercel",
-      "Jira",
-      "Trello",
-      "Confluence",
-      "Agile/Scrum",
-      "App Store releases",
-    ],
-  },
+export const skillCategories = [
+  { id: "all", label: "All" },
+  { id: "frontend", label: "Frontend & Mobile" },
+  { id: "backend", label: "Backend" },
+  { id: "state", label: "State" },
+  { id: "workflow", label: "Workflow & AI" },
+];
+
+export const skills = [
+  { name: "React Native", level: 94, category: "frontend" },
+  { name: "React.js", level: 92, category: "frontend" },
+  { name: "JavaScript", level: 90, category: "frontend" },
+  { name: "Next.js", level: 88, category: "frontend" },
+  { name: "TypeScript", level: 88, category: "frontend" },
+  { name: "Tailwind CSS", level: 82, category: "frontend" },
+  { name: "Firebase", level: 68, category: "frontend" },
+  { name: "App Store / Google Play Releases", level: 84, category: "frontend" },
+  { name: "Redux Toolkit", level: 84, category: "state" },
+  { name: "RTK Query", level: 80, category: "state" },
+  { name: "Redux", level: 82, category: "state" },
+  { name: "Zustand", level: 65, category: "state" },
+  { name: "GraphQL", level: 86, category: "backend" },
+  { name: "REST APIs", level: 78, category: "backend" },
+  { name: "Node.js", level: 70, category: "backend" },
+  { name: "MySQL", level: 78, category: "backend" },
+  { name: "NestJS", level: 60, category: "backend" },
+  { name: "PostgreSQL", level: 60, category: "backend" },
+  { name: "Git & GitHub", level: 88, category: "workflow" },
+  { name: "Agile/Scrum", level: 84, category: "workflow" },
+  { name: "Jira", level: 86, category: "workflow" },
+  { name: "Confluence", level: 80, category: "workflow" },
+  { name: "AI-assisted Development", level: 84, category: "workflow" },
+  { name: "Vercel", level: 80, category: "workflow" },
 ];
 
 export const credentials = [
