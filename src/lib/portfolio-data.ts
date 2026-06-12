@@ -1,0 +1,259 @@
+import {
+  Bot,
+  Braces,
+  BriefcaseBusiness,
+  Code2,
+  GraduationCap,
+  Layers3,
+  MessageCircle,
+  PenLine,
+  Rocket,
+  Smartphone,
+  Sparkles,
+  Workflow,
+} from "lucide-react";
+
+export const profile = {
+  name: "Swarnali Roy",
+  role: "Senior Software Engineer",
+  headline:
+    "React Native and React engineer building production apps, polished interfaces, and release-ready product workflows.",
+  summary:
+    "I build production-grade React Native, React, and Next.js experiences, translate Figma into refined interfaces, integrate real APIs, and help teams ship through clear Agile workflows.",
+  location: "Dhaka, Bangladesh",
+  email: "swarnali.roy093@gmail.com",
+  resumeHref: "/resume/swarnali-roy-resume.pdf",
+  socials: [
+    {
+      label: "GitHub",
+      href: "https://github.com/SwarnaliRoy94",
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/royswarnali/",
+    },
+    {
+      label: "DEV",
+      href: "https://dev.to/swarnaliroy94",
+    },
+  ],
+};
+
+export const stats = [
+  { value: "4+", label: "Years of production engineering" },
+  { value: "180K+", label: "DEV Community views" },
+  { value: "App Store", label: "Release cycle ownership" },
+];
+
+export const focusAreas = [
+  {
+    title: "Mobile engineering",
+    description:
+      "Cross-platform React Native apps with responsive UI, release ownership, monetization, and app store delivery.",
+    icon: Smartphone,
+  },
+  {
+    title: "Frontend systems",
+    description:
+      "Next.js and React interfaces with TypeScript, Tailwind CSS, Redux Toolkit, RTK Query, REST, and GraphQL.",
+    icon: Layers3,
+  },
+  {
+    title: "Agile delivery",
+    description:
+      "Jira tickets, sprint visibility, backlog support, Confluence documentation, and team coordination.",
+    icon: Workflow,
+  },
+  {
+    title: "AI-assisted workflow",
+    description:
+      "Claude, Codex, ChatGPT, GitHub Copilot, and prompt engineering for faster debugging and cleaner delivery.",
+    icon: Bot,
+  },
+];
+
+export const experiences = [
+  {
+    company: "Younode, Inc.",
+    role: "Software Engineer & Agile Coordinator",
+    period: "Jan 2024 - Present",
+    location: "Remote",
+    summary:
+      "Owns React Native feature delivery for a production social music app while supporting sprint clarity, release coordination, and cross-functional execution.",
+    highlights: [
+      "Developed and maintained cross-platform mobile features using React Native with strong UX and Figma-to-code accuracy.",
+      "Owned feature work including follow interactions, like animations, onboarding, monetization, and UI rebranding streams.",
+      "Managed mobile release cycles: build generation, versioning, deployment, App Store, and Google Play coordination.",
+      "Integrated AppLovin and Meta Audience Network for in-feed ads and built NestJS APIs to support mobile functionality.",
+      "Facilitated daily Scrum stand-ups, translated requirements into Jira tickets, clarified acceptance criteria, and tracked blockers.",
+      "Documented workflows and technical decisions in Confluence while using AI tools to accelerate debugging, ticket drafting, and delivery.",
+    ],
+    tags: [
+      "React Native",
+      "NestJS",
+      "AppLovin",
+      "Jira",
+      "Confluence",
+      "Release management",
+    ],
+  },
+  {
+    company: "Codeware Innovations",
+    role: "Frontend & Mobile App Developer",
+    period: "Oct 2021 - Apr 2023",
+    location: "Dhaka, Bangladesh",
+    summary:
+      "Built client-facing React, Next.js, and React Native applications, including live sports products and production web platforms.",
+    highlights: [
+      "Built a React Native mobile app for a live sports news platform with live scores, match stats, and chat features.",
+      "Developed production web applications including a domain purchasing platform using Next.js, TypeScript, Redux Toolkit, and RTK Query.",
+      "Delivered social web features with Instagram-like interactions using React, Redux, and WordPress integrations.",
+      "Integrated REST and GraphQL APIs while optimizing high-frequency frontend updates and reducing unnecessary re-renders.",
+      "Introduced daily stand-ups, Trello/Kanban practices, and Notion documentation to improve team visibility.",
+    ],
+    tags: [
+      "Next.js",
+      "React Native",
+      "GraphQL",
+      "Redux Toolkit",
+      "RTK Query",
+      "Kanban",
+    ],
+  },
+  {
+    company: "Upwork",
+    role: "Freelance Frontend Developer",
+    period: "Jan 2021 - Sep 2021",
+    location: "International clients",
+    summary:
+      "Delivered early web and mobile projects for international clients with ownership across communication, implementation, and timelines.",
+    highlights: [
+      "Delivered web and mobile apps using React, React Native, Redux, and API integrations.",
+      "Managed requirements, timelines, and communication across client-facing projects.",
+    ],
+    tags: ["React", "React Native", "Redux", "Client communication"],
+  },
+];
+
+export const projects = [
+  {
+    name: "Pulp",
+    category: "Music sharing social platform",
+    stack: ["React Native", "Spotify API", "Firebase", "AppLovin"],
+    description:
+      "Production social music app with curated playlists, listening-history unlocks, rebranded UI, in-feed ads, and release support.",
+    icon: Sparkles,
+  },
+  {
+    name: "Sportsdemy",
+    category: "Sports news and live data",
+    stack: ["Next.js", "React Native", "GraphQL"],
+    description:
+      "Real-time sports platform with live scores, match stats, chat features, and frontend performance tuned for frequent data updates.",
+    icon: Rocket,
+  },
+  {
+    name: "HireCraft",
+    category: "Online assessment platform",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Zustand"],
+    description:
+      "Role-based employer and candidate panels with exam timers, progress handling, auto-submission, and workflow-focused UX.",
+    icon: BriefcaseBusiness,
+  },
+  {
+    name: "Blood Bank App",
+    category: "Donor discovery mobile app",
+    stack: ["React Native", "Redux Toolkit"],
+    description:
+      "Mobile app for donor search, donor profiles, authentication, password recovery, profile updates, and image uploads.",
+    icon: MessageCircle,
+  },
+  {
+    name: "Exam Taker App",
+    category: "Mobile exam experience",
+    stack: ["React Native"],
+    description:
+      "MCQ exam flow with subject selection, countdown timer, swipeable questions, review flags, and visual question states.",
+    icon: PenLine,
+  },
+  {
+    name: "AI Automation Bots",
+    category: "Workflow and travel automation",
+    stack: ["Claude", "Codex", "GitHub Copilot", "LLM APIs"],
+    description:
+      "TripTailor travel assistant and Slack reporting bot built with AI-assisted workflows and prompt engineering.",
+    icon: Bot,
+  },
+];
+
+export const skillGroups = [
+  {
+    title: "Frontend & mobile",
+    icon: Code2,
+    skills: [
+      "React Native",
+      "React.js",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+      "Responsive UI",
+      "Figma-to-code",
+    ],
+  },
+  {
+    title: "Data & backend",
+    icon: Braces,
+    skills: [
+      "REST APIs",
+      "GraphQL",
+      "Node.js",
+      "NestJS",
+      "PostgreSQL",
+      "MySQL",
+      "Firebase",
+      "RTK Query",
+    ],
+  },
+  {
+    title: "Delivery & tooling",
+    icon: Workflow,
+    skills: [
+      "Git",
+      "CI/CD",
+      "Vercel",
+      "Jira",
+      "Trello",
+      "Confluence",
+      "Agile/Scrum",
+      "App Store releases",
+    ],
+  },
+];
+
+export const credentials = [
+  {
+    title: "B.Sc. in Computer Science & Engineering",
+    subtitle: "Ahsanullah University of Science and Technology",
+    meta: "Apr 2014 - Jun 2018",
+    icon: GraduationCap,
+  },
+  {
+    title: "React Native",
+    subtitle: "Coursera, Meta",
+    meta: "Certification",
+    icon: Smartphone,
+  },
+  {
+    title: "Agile Development and Scrum",
+    subtitle: "Coursera, IBM",
+    meta: "Certification",
+    icon: Workflow,
+  },
+  {
+    title: "Frontend Developer (React)",
+    subtitle: "HackerRank",
+    meta: "Certification",
+    icon: Code2,
+  },
+];
