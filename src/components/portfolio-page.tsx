@@ -382,7 +382,7 @@ export function PortfolioPage() {
                         role="progressbar"
                       >
                         <motion.div
-                          className="h-full rounded-full bg-teal-400 shadow-[0_0_18px_rgba(45,226,197,0.24)]"
+                          className="h-full rounded-full bg-linear-to-r from-[#B4A7D6] to-[#8BD5DD] shadow-[0_0_18px_rgba(139,213,221,0.24)]"
                           initial={{ width: 0 }}
                           transition={{
                             delay:
