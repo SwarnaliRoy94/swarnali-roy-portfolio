@@ -5,10 +5,10 @@ import {
   GraduationCap,
   Layers3,
   MessageCircle,
+  Music,
   PenLine,
   Rocket,
   Smartphone,
-  Sparkles,
   Workflow,
 } from "lucide-react";
 
@@ -146,14 +146,16 @@ export const projects = [
     stack: ["React Native", "Spotify API", "Firebase", "AppLovin"],
     description:
       "Production social music app with curated playlists, listening-history unlocks, rebranded UI, in-feed ads, and release support.",
-    icon: Sparkles,
+    appStoreUrl: "https://apps.apple.com/us/app/pulp/id1561314695",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.younode.pulp",
+    icon: Music,
   },
   {
     name: "Sportsdemy",
     category: "Sports news and live data",
     stack: ["Next.js", "React Native", "GraphQL"],
     description:
-      "Real-time sports platform with live scores, match stats, chat features, and frontend performance tuned for frequent data updates.",
+      "Built both the Next.js website and React Native app for real-time sports data, live scores, match stats, chat features, and high-frequency frontend updates.",
     icon: Rocket,
   },
   {
@@ -162,7 +164,19 @@ export const projects = [
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Zustand"],
     description:
       "Role-based employer and candidate panels with exam timers, progress handling, auto-submission, and workflow-focused UX.",
+    githubUrl: "https://github.com/SwarnaliRoy94/HireCraft",
+    liveUrl: "https://hire-craft-xi.vercel.app/login",
     icon: BriefcaseBusiness,
+  },
+  {
+    name: "TripTailor",
+    category: "AI travel assistant",
+    stack: ["React", "LLM APIs", "Claude", "Codex"],
+    description:
+      "AI-powered travel assistant for planning trips and flight-booking workflows, built with LLM integration and AI-assisted development.",
+    githubUrl: "https://github.com/SwarnaliRoy94/TravelAgent",
+    liveUrl: "https://travel-agent-3oig.vercel.app/",
+    icon: Bot,
   },
   {
     name: "Blood Bank App",
@@ -170,6 +184,7 @@ export const projects = [
     stack: ["React Native", "Redux Toolkit"],
     description:
       "Mobile app for donor search, donor profiles, authentication, password recovery, profile updates, and image uploads.",
+    githubUrl: "https://github.com/SwarnaliRoy94/bloodbankapp",
     icon: MessageCircle,
   },
   {
@@ -178,15 +193,8 @@ export const projects = [
     stack: ["React Native"],
     description:
       "MCQ exam flow with subject selection, countdown timer, swipeable questions, review flags, and visual question states.",
+    githubUrl: "https://github.com/SwarnaliRoy94/examTakerApplication",
     icon: PenLine,
-  },
-  {
-    name: "AI Automation Bots",
-    category: "Workflow and travel automation",
-    stack: ["Claude", "Codex", "GitHub Copilot", "LLM APIs"],
-    description:
-      "TripTailor travel assistant and Slack reporting bot built with AI-assisted workflows and prompt engineering.",
-    icon: Bot,
   },
 ];
 
