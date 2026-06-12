@@ -23,7 +23,7 @@ import {
 
 const navItems = [
   { label: "Home", href: "#top" },
-  { label: "Focus", href: "#focus" },
+  { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
@@ -83,6 +83,14 @@ function Section({
 function Chip({ children }: { children: React.ReactNode }) {
   return (
     <span className="rounded-lg border border-slate-200 bg-white/70 px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
+      {children}
+    </span>
+  );
+}
+
+function MiniChip({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="rounded-full border border-slate-200/80 bg-white/45 px-2.5 py-1 text-xs font-medium text-slate-500 backdrop-blur dark:border-white/10 dark:bg-white/[0.035] dark:text-slate-400">
       {children}
     </span>
   );
@@ -180,45 +188,9 @@ export function PortfolioPage() {
               {profile.headline}
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <a
-                className="rounded-full bg-teal-300 px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_34px_rgba(45,226,197,0.24)] transition hover:bg-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-stone-50 dark:focus:ring-offset-slate-950"
-                href="#experience"
-              >
-                View work
-              </a>
-              <a
-                className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:border-teal-500 hover:text-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-stone-50 dark:border-white/15 dark:text-white dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-offset-slate-950"
-                download
-                href={profile.resumeHref}
-              >
-                Resume
-                <Download aria-hidden="true" className="size-4" />
-              </a>
-              <a
-                className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:border-teal-500 hover:text-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-stone-50 dark:border-white/15 dark:text-white dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-offset-slate-950"
-                href={`mailto:${profile.email}`}
-              >
-                Contact
-                <Mail aria-hidden="true" className="size-4" />
-              </a>
-            </div>
-
-            <div className="mt-12 flex flex-wrap justify-center gap-2">
-              {[
-                "React Native",
-                "Next.js",
-                "TypeScript",
-                "Figma-to-code",
-                "Agile/Scrum",
-                "AI-assisted development",
-              ].map((item) => (
-                <Chip key={item}>{item}</Chip>
-              ))}
-            </div>
           </motion.div>
 
-          <div className="mt-12 grid w-full max-w-4xl gap-3 border-t border-slate-950/10 pt-6 dark:border-white/10 sm:grid-cols-3">
+          <div className="mt-14 grid w-full max-w-4xl gap-3 border-t border-slate-950/10 pt-6 dark:border-white/10 sm:grid-cols-3">
             {stats.map((item) => (
               <div key={item.label}>
                 <p className="text-2xl font-semibold text-slate-950 dark:text-white">
@@ -232,48 +204,92 @@ export function PortfolioPage() {
           </div>
         </section>
 
-        <Section
-          description={profile.summary}
-          eyebrow="Focus"
-          id="focus"
-          title="Frontend and mobile engineering with delivery ownership."
+        <motion.section
+          className="container-page scroll-mt-24 py-16 md:py-24"
+          id="about"
+          initial="hidden"
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          variants={reveal(Boolean(reduceMotion))}
+          viewport={{ once: true, margin: "-100px" }}
+          whileInView="visible"
         >
-          <div className="grid gap-4 md:grid-cols-2">
-            {focusAreas.map((area, index) => {
-              const Icon = area.icon;
-
-              return (
-                <motion.article
-                  className="card p-5"
-                  initial="hidden"
-                  key={area.title}
-                  transition={{ delay: index * 0.04, duration: 0.35 }}
-                  variants={reveal(Boolean(reduceMotion))}
-                  viewport={{ once: true }}
-                  whileHover={reduceMotion ? undefined : { y: -4 }}
-                  whileInView="visible"
-                >
-                  <Icon
-                    aria-hidden="true"
-                    className="mb-5 size-6 text-teal-700 dark:text-teal-300"
-                  />
-                  <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
-                    {area.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                    {area.description}
-                  </p>
-                </motion.article>
-              );
-            })}
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <p className="mb-3 font-mono text-md font-semibold uppercase tracking-[0.22em] text-teal-700 dark:text-teal-300">
+              About Me
+            </p>
+            {/* <h2 className="text-3xl font-semibold leading-tight text-slate-950 dark:text-white md:text-4xl">
+              About{" "}
+              <span className="bg-gradient-to-r from-teal-500 via-violet-500 to-rose-500 bg-clip-text text-transparent dark:from-teal-200 dark:via-violet-300 dark:to-rose-300">
+                Me
+              </span>
+            </h2> */}
           </div>
-        </Section>
+
+          <div className="grid gap-10 md:grid-cols-[1fr_0.95fr] md:items-center">
+            <div className="space-y-5">
+              <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">
+                Building Mobile-First Products with Frontend Craft and Delivery
+                Ownership.
+              </h3>
+              {profile.about.map((paragraph) => (
+                <p
+                  className="text-base leading-8 text-slate-600 dark:text-slate-300"
+                  key={paragraph}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            <div className="grid gap-5">
+              {focusAreas.map((area, index) => {
+                const Icon = area.icon;
+
+                return (
+                  <motion.article
+                    className="card group p-5 transition"
+                    initial={{
+                      opacity: 0,
+                      x: reduceMotion ? 0 : 96,
+                    }}
+                    key={area.title}
+                    transition={{
+                      delay: index * 0.08,
+                      duration: 0.55,
+                      ease: "easeOut",
+                    }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    whileHover={reduceMotion ? undefined : { y: -4 }}
+                    whileInView={{
+                      opacity: 1,
+                      x: 0,
+                    }}
+                  >
+                    <div className="flex items-start gap-4 text-left">
+                      <div className="rounded-full bg-teal-400/15 p-3 text-teal-700 shadow-[0_0_24px_rgba(45,226,197,0.14)] transition group-hover:bg-teal-300/25 dark:text-teal-300">
+                        <Icon aria-hidden="true" className="size-6" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
+                          {area.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                          {area.description}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </div>
+          </div>
+        </motion.section>
 
         <Section
-          description="A fuller picture from the RN, React, and Agile CVs: mobile feature ownership, frontend systems, release management, and team coordination."
+          description="Building and shipping production mobile apps, frontend platforms, and release-ready product experiences."
           eyebrow="Track record"
           id="experience"
-          title="Experience"
+          title="Work Experience"
         >
           <ol className="relative space-y-8 border-l border-slate-300 pl-6 dark:border-white/15">
             {experiences.map((item, index) => (
@@ -321,7 +337,7 @@ export function PortfolioPage() {
                   </ul>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {item.tags?.map((tag) => (
-                      <Chip key={tag}>{tag}</Chip>
+                      <MiniChip key={tag}>{tag}</MiniChip>
                     ))}
                   </div>
                 </article>
