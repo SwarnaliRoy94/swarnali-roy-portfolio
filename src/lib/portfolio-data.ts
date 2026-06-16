@@ -321,13 +321,41 @@ export const skills = [
   { name: "Vercel", level: 80, category: "workflow" },
 ];
 
-export const credentials = [
+export const education = [
   {
     title: "B.Sc. in Computer Science & Engineering",
     subtitle: "Ahsanullah University of Science and Technology",
     meta: "Apr 2014 - Jun 2018",
     icon: GraduationCap,
   },
+  {
+    title: "Higher Secondary Certificate",
+    subtitle: "Viqarunnisa Noon School and College",
+    meta: "HSC · 2013",
+    icon: GraduationCap,
+  },
+  {
+    title: "Secondary School Certificate",
+    subtitle: "Viqarunnisa Noon School and College",
+    meta: "SSC · 2011",
+    icon: GraduationCap,
+  },
+];
+
+export const languages = [
+  {
+    name: "English",
+    level: "Professional proficiency",
+    meta: "IELTS 7.5",
+  },
+  {
+    name: "Bangla",
+    level: "Native proficiency",
+    meta: "Native",
+  },
+];
+
+export const certifications = [
   {
     title: "React Native",
     subtitle: "Coursera, Meta",
@@ -339,6 +367,18 @@ export const credentials = [
     subtitle: "Coursera, IBM",
     meta: "Certification",
     icon: Workflow,
+  },
+  {
+    title: "Introduction to Scrum Master Profession",
+    subtitle: "Coursera, SkillUp",
+    meta: "Certification",
+    icon: Workflow,
+  },
+  {
+    title: "Learn AI Agents",
+    subtitle: "Coursera, Scrimba",
+    meta: "Certification",
+    icon: Bot,
   },
   {
     title: "Frontend Developer (React)",

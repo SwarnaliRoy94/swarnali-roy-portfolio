@@ -15,9 +15,11 @@ import Image from "next/image";
 import { Starfield } from "@/components/starfield";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import {
-  credentials,
+  certifications,
+  education,
   experiences,
   focusAreas,
+  languages,
   profile,
   projects,
   skillCategories,
@@ -693,20 +695,74 @@ export function PortfolioPage() {
         </Section>
 
         <Section
-          description="Formal education, certifications, and public writing that support the engineering story."
-          eyebrow="Credentials"
-          id="credentials"
-          title="Education and certifications"
+          description="Academic foundation and language proficiency that support my engineering and delivery work."
+          eyebrow="Education"
+          id="education"
+          title="Education"
         >
-          <div className="grid gap-4 md:grid-cols-2">
-            {credentials.map((item) => {
+          <div className="grid gap-4 md:grid-cols-3">
+            {education.map((item) => {
               const Icon = item.icon;
 
               return (
                 <article className="card p-5" key={`${item.title}-${item.subtitle}`}>
                   <Icon
                     aria-hidden="true"
-                    className="mb-4 size-6 text-teal-700 dark:text-teal-300"
+                    className="mb-4 size-6 text-[#B4A7D6]"
+                  />
+                  <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                    {item.subtitle}
+                  </p>
+                  <p className="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-rose-600 dark:text-rose-300">
+                    {item.meta}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            {languages.map((item) => (
+              <article className="card p-5" key={item.name}>
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#B4A7D6]">
+                  Language
+                </p>
+                <div className="mt-4 flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
+                      {item.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                      {item.level}
+                    </p>
+                  </div>
+                  <span className="rounded-full border border-slate-200/80 bg-slate-950/[0.03] px-3 py-1 text-xs font-semibold text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
+                    {item.meta}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          description="Selected certifications that reflect my React Native, frontend, Agile, and AI-assisted delivery practice."
+          eyebrow="Certifications"
+          id="certifications"
+          title="Certifications"
+        >
+          <div className="grid gap-4 md:grid-cols-2">
+            {certifications.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <article className="card p-5" key={`${item.title}-${item.subtitle}`}>
+                  <Icon
+                    aria-hidden="true"
+                    className="mb-4 size-6 text-[#B4A7D6]"
                   />
                   <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
                     {item.title}
