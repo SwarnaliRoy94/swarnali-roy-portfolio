@@ -146,6 +146,21 @@ export const projects = [
     stack: ["React Native", "Spotify API", "Firebase", "AppLovin"],
     description:
       "Production social music app with curated playlists, listening-history unlocks, rebranded UI, in-feed ads, and release support.",
+    previewImages: [
+      {
+        src: "/projects/Pulp Portfolio Photos/pulp_collect.PNG",
+        alt: "Pulp collection screen",
+      },
+      {
+        src: "/projects/Pulp Portfolio Photos/pulp_connect.PNG",
+        alt: "Pulp connect screen",
+      },
+      {
+        src: "/projects/Pulp Portfolio Photos/pulp_discover.PNG",
+        alt: "Pulp music discovery screen",
+      },
+    ],
+    previewLayout: "phone-grid",
     appStoreUrl: "https://apps.apple.com/us/app/pulp/id1561314695",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.younode.pulp",
     icon: Music,
@@ -156,6 +171,29 @@ export const projects = [
     stack: ["Next.js", "React Native", "GraphQL"],
     description:
       "Built both the Next.js website and React Native app for real-time sports data, live scores, match stats, chat features, and high-frequency frontend updates.",
+    previewImages: [
+      {
+        src: "/projects/Sportsdemy/sportsdemy_allmatches.png",
+        alt: "Sportsdemy all matches mobile screen",
+      },
+      {
+        src: "/projects/Sportsdemy/match_info.png",
+        alt: "Sportsdemy match information screen",
+      },
+      {
+        src: "/projects/Sportsdemy/live_chat.png",
+        alt: "Sportsdemy live chat screen",
+      },
+      {
+        src: "/projects/Sportsdemy/prev_matches.png",
+        alt: "Sportsdemy previous matches screen",
+      },
+      {
+        src: "/projects/Sportsdemy/tounament_standings.png",
+        alt: "Sportsdemy tournament standings screen",
+      },
+    ],
+    previewLayout: "phone-grid",
     icon: Rocket,
   },
   {
@@ -164,6 +202,12 @@ export const projects = [
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Zustand"],
     description:
       "Role-based employer and candidate panels with exam timers, progress handling, auto-submission, and workflow-focused UX.",
+    previewImages: [
+      {
+        src: "/projects/hirecraft-login.png",
+        alt: "HireCraft sign-in screen",
+      },
+    ],
     githubUrl: "https://github.com/SwarnaliRoy94/HireCraft",
     liveUrl: "https://hire-craft-xi.vercel.app/login",
     icon: BriefcaseBusiness,
@@ -174,6 +218,20 @@ export const projects = [
     stack: ["React", "LLM APIs", "Claude", "Codex"],
     description:
       "AI-powered travel assistant for planning trips and flight-booking workflows, built with LLM integration and AI-assisted development.",
+    previewImages: [
+      {
+        src: "/projects/TripTailor Portfolio/TripTailor_Landing.png",
+        alt: "TripTailor landing screen",
+      },
+      {
+        src: "/projects/TripTailor Portfolio/trip_form.png",
+        alt: "TripTailor trip planning form",
+      },
+      {
+        src: "/projects/TripTailor Portfolio/plan.png",
+        alt: "TripTailor generated trip options",
+      },
+    ],
     githubUrl: "https://github.com/SwarnaliRoy94/TravelAgent",
     liveUrl: "https://travel-agent-3oig.vercel.app/",
     icon: Bot,
@@ -184,6 +242,21 @@ export const projects = [
     stack: ["React Native", "Redux Toolkit"],
     description:
       "Mobile app for donor search, donor profiles, authentication, password recovery, profile updates, and image uploads.",
+    previewImages: [
+      {
+        src: "/projects/BloodBank/login.png",
+        alt: "Blood Bank app login screen",
+      },
+      {
+        src: "/projects/BloodBank/blood_bank_home.png",
+        alt: "Blood Bank app home screen",
+      },
+      {
+        src: "/projects/BloodBank/become_a_donor.png",
+        alt: "Blood Bank become a donor screen",
+      },
+    ],
+    previewLayout: "phone-grid",
     githubUrl: "https://github.com/SwarnaliRoy94/bloodbankapp",
     icon: MessageCircle,
   },
@@ -193,6 +266,21 @@ export const projects = [
     stack: ["React Native"],
     description:
       "MCQ exam flow with subject selection, countdown timer, swipeable questions, review flags, and visual question states.",
+    previewImages: [
+      {
+        src: "/ExamTaker/catagory_choosing.png",
+        alt: "Exam Taker subject selection screen",
+      },
+      {
+        src: "/ExamTaker/question.png",
+        alt: "Exam Taker question screen",
+      },
+      {
+        src: "/ExamTaker/drawer.png",
+        alt: "Exam Taker question drawer screen",
+      },
+    ],
+    previewLayout: "phone-grid",
     githubUrl: "https://github.com/SwarnaliRoy94/examTakerApplication",
     icon: PenLine,
   },

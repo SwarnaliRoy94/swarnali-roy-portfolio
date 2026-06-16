@@ -3,6 +3,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
   Download,
   ExternalLink,
   Mail,
@@ -124,6 +126,105 @@ function ProjectAction({
     >
       {children}
     </a>
+  );
+}
+
+function ProjectCarousel({
+  images,
+  projectName,
+}: {
+  images: { src: string; alt: string }[];
+  projectName: string;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeImage = images[activeIndex];
+  const hasMultipleImages = images.length > 1;
+
+  const showPrevious = () => {
+    setActiveIndex((current) =>
+      current === 0 ? images.length - 1 : current - 1,
+    );
+  };
+
+  const showNext = () => {
+    setActiveIndex((current) =>
+      current === images.length - 1 ? 0 : current + 1,
+    );
+  };
+
+  return (
+    <div className="group/preview relative mb-5 aspect-[4/3] overflow-hidden rounded-lg border border-slate-200 bg-slate-100 dark:border-white/10 dark:bg-white/5">
+      <Image
+        alt={activeImage.alt}
+        className="object-contain object-center p-2 transition duration-500 group-hover/preview:scale-[1.02]"
+        fill
+        sizes="(min-width: 768px) 50vw, 100vw"
+        src={activeImage.src}
+      />
+
+      {hasMultipleImages ? (
+        <>
+          <button
+            aria-label={`Show previous ${projectName} screenshot`}
+            className="absolute left-3 top-1/2 inline-flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-slate-950/60 text-white opacity-0 backdrop-blur transition hover:bg-slate-950/80 group-hover/preview:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/80"
+            onClick={showPrevious}
+            type="button"
+          >
+            <ChevronLeft aria-hidden="true" className="size-5" />
+          </button>
+          <button
+            aria-label={`Show next ${projectName} screenshot`}
+            className="absolute right-3 top-1/2 inline-flex size-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-slate-950/60 text-white opacity-0 backdrop-blur transition hover:bg-slate-950/80 group-hover/preview:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-white/80"
+            onClick={showNext}
+            type="button"
+          >
+            <ChevronRight aria-hidden="true" className="size-5" />
+          </button>
+          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 rounded-full bg-transparent px-2 py-1.5">
+            {images.map((image, index) => (
+              <button
+                aria-label={`Show ${projectName} screenshot ${index + 1}`}
+                className={`size-1.5 rounded-full ring-1 ring-white/35 transition ${
+                  activeIndex === index ? "bg-white/80" : "bg-white/20"
+                }`}
+                key={image.src}
+                onClick={() => setActiveIndex(index)}
+                type="button"
+              />
+            ))}
+          </div>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function PhoneGridPreview({
+  images,
+}: {
+  images: { src: string; alt: string }[];
+}) {
+  const visibleImages = images.slice(0, 3);
+
+  return (
+    <div className="mb-5 flex aspect-[4/3] items-center justify-center gap-3 overflow-hidden rounded-lg border border-slate-200 bg-slate-100 px-4 py-4 dark:border-white/10 dark:bg-white/5">
+      {visibleImages.map((image, index) => (
+        <div
+          className={`relative h-full min-h-0 flex-1 overflow-hidden rounded-[1.35rem] border-[3px] border-slate-950 bg-slate-950 shadow-xl shadow-slate-950/20 dark:border-slate-800 ${
+            index === 1 ? "translate-y-0" : "translate-y-3"
+          }`}
+          key={image.src}
+        >
+          <Image
+            alt={image.alt}
+            className="object-cover object-top"
+            fill
+            sizes="(min-width: 768px) 18vw, 30vw"
+            src={image.src}
+          />
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -514,6 +615,16 @@ export function PortfolioPage() {
                   whileHover={reduceMotion ? undefined : { y: -4 }}
                   whileInView="visible"
                 >
+                  {project.previewImages?.length ? (
+                    project.previewLayout === "phone-grid" ? (
+                      <PhoneGridPreview images={project.previewImages} />
+                    ) : (
+                      <ProjectCarousel
+                        images={project.previewImages}
+                        projectName={project.name}
+                      />
+                    )
+                  ) : null}
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-teal-700 dark:text-teal-300">
