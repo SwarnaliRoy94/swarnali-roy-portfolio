@@ -15,9 +15,11 @@ import Image from "next/image";
 import { Starfield } from "@/components/starfield";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import {
-  credentials,
+  certifications,
+  education,
   experiences,
   focusAreas,
+  languages,
   profile,
   projects,
   skillCategories,
@@ -231,6 +233,9 @@ function PhoneGridPreview({
 export function PortfolioPage() {
   const reduceMotion = useReducedMotion();
   const [activeSkillCategory, setActiveSkillCategory] = useState("all");
+  const [selectedCertificate, setSelectedCertificate] = useState<
+    (typeof certifications)[number] | null
+  >(null);
   const visibleSkillGroups = useMemo(
     () =>
       skillCategories
@@ -376,8 +381,7 @@ export function PortfolioPage() {
           <div className="grid gap-10 md:grid-cols-[1fr_0.95fr] md:items-center">
             <div className="space-y-5">
               <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">
-                Building Mobile-First Products with Frontend Craft and Delivery
-                Ownership.
+                Software Engineer & Mobile App Developer
               </h3>
               {profile.about.map((paragraph) => (
                 <p
@@ -693,20 +697,20 @@ export function PortfolioPage() {
         </Section>
 
         <Section
-          description="Formal education, certifications, and public writing that support the engineering story."
-          eyebrow="Credentials"
-          id="credentials"
-          title="Education and certifications"
+          description="Academic foundation and language proficiency that support my engineering and delivery work."
+          eyebrow="Education"
+          id="education"
+          title="Education"
         >
-          <div className="grid gap-4 md:grid-cols-2">
-            {credentials.map((item) => {
+          <div className="grid gap-4 md:grid-cols-3">
+            {education.map((item) => {
               const Icon = item.icon;
 
               return (
                 <article className="card p-5" key={`${item.title}-${item.subtitle}`}>
                   <Icon
                     aria-hidden="true"
-                    className="mb-4 size-6 text-teal-700 dark:text-teal-300"
+                    className="mb-4 size-6 text-[#B4A7D6]"
                   />
                   <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
                     {item.title}
@@ -717,6 +721,89 @@ export function PortfolioPage() {
                   <p className="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-rose-600 dark:text-rose-300">
                     {item.meta}
                   </p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            {languages.map((item) => (
+              <article className="card p-5" key={item.name}>
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#B4A7D6]">
+                  Language
+                </p>
+                <div className="mt-4 flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
+                      {item.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                      {item.level}
+                    </p>
+                  </div>
+                  <span className="rounded-full border border-slate-200/80 bg-slate-950/[0.03] px-3 py-1 text-xs font-semibold text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
+                    {item.meta}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Section>
+
+        <Section
+          description="Selected certifications that reflect my React Native, frontend, Agile, and AI-assisted delivery practice."
+          eyebrow="Certifications"
+          id="certifications"
+          title="Certifications"
+        >
+          <div className="grid gap-4 md:grid-cols-2">
+            {certifications.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <article
+                  className="card grid gap-4 p-5 sm:grid-cols-[1fr_150px] sm:items-start"
+                  key={`${item.title}-${item.subtitle}`}
+                >
+                  <div>
+                    <Icon
+                      aria-hidden="true"
+                      className="mb-4 size-6 text-[#B4A7D6]"
+                    />
+                    <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                      {item.subtitle}
+                    </p>
+                    <p className="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-rose-600 dark:text-rose-300">
+                      {item.meta}
+                    </p>
+                  </div>
+
+                  <div className="sm:text-right">
+                    <button
+                      className="block overflow-hidden rounded-xl border border-slate-200/80 bg-white transition hover:border-[#B4A7D6]/70 dark:border-white/10"
+                      onClick={() => setSelectedCertificate(item)}
+                      type="button"
+                    >
+                      <Image
+                        alt={`${item.title} certificate`}
+                        className="h-24 w-full object-contain sm:w-[150px]"
+                        height={300}
+                        src={item.certificateImage}
+                        width={450}
+                      />
+                    </button>
+                    <button
+                      className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-slate-700 transition hover:text-[#B4A7D6] dark:text-slate-300 dark:hover:text-[#B4A7D6]"
+                      onClick={() => setSelectedCertificate(item)}
+                      type="button"
+                    >
+                      View certificate
+                      <ExternalLink aria-hidden="true" className="size-4" />
+                    </button>
+                  </div>
                 </article>
               );
             })}
@@ -774,6 +861,60 @@ export function PortfolioPage() {
             </p>
           </footer>
         </section>
+
+        {selectedCertificate ? (
+          <motion.div
+            animate={{ opacity: 1 }}
+            aria-label={`${selectedCertificate.title} certificate preview`}
+            aria-modal="true"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            role="dialog"
+          >
+            <button
+              aria-label="Close certificate preview"
+              className="absolute inset-0 cursor-default"
+              onClick={() => setSelectedCertificate(null)}
+              type="button"
+            />
+            <motion.article
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              className="relative z-10 w-full max-w-5xl rounded-[1.75rem] border border-white/15 bg-white p-3 shadow-2xl shadow-slate-950/40 dark:bg-slate-950"
+              initial={{ opacity: 0, scale: 0.96, y: 16 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+            >
+              <div className="mb-3 flex items-center justify-between gap-4 px-2 pt-1">
+                <div>
+                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#B4A7D6]">
+                    Certificate
+                  </p>
+                  <h3 className="mt-1 text-lg font-semibold text-slate-950 dark:text-white">
+                    {selectedCertificate.title}
+                  </h3>
+                </div>
+                <button
+                  aria-label="Close certificate preview"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-slate-200 text-xl leading-none text-slate-600 transition hover:border-[#B4A7D6] hover:text-[#B4A7D6] dark:border-white/10 dark:text-slate-300"
+                  onClick={() => setSelectedCertificate(null)}
+                  type="button"
+                >
+                  ×
+                </button>
+              </div>
+              <div className="max-h-[78vh] overflow-auto rounded-[1.25rem] bg-slate-100 dark:bg-slate-900">
+                <Image
+                  alt={`${selectedCertificate.title} certificate`}
+                  className="h-auto w-full"
+                  height={900}
+                  priority
+                  src={selectedCertificate.certificateImage}
+                  width={1280}
+                />
+              </div>
+            </motion.article>
+          </motion.div>
+        ) : null}
+
       </div>
     </main>
   );
