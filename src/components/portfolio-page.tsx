@@ -233,6 +233,9 @@ function PhoneGridPreview({
 export function PortfolioPage() {
   const reduceMotion = useReducedMotion();
   const [activeSkillCategory, setActiveSkillCategory] = useState("all");
+  const [selectedCertificate, setSelectedCertificate] = useState<
+    (typeof certifications)[number] | null
+  >(null);
   const visibleSkillGroups = useMemo(
     () =>
       skillCategories
@@ -759,20 +762,49 @@ export function PortfolioPage() {
               const Icon = item.icon;
 
               return (
-                <article className="card p-5" key={`${item.title}-${item.subtitle}`}>
-                  <Icon
-                    aria-hidden="true"
-                    className="mb-4 size-6 text-[#B4A7D6]"
-                  />
-                  <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                    {item.subtitle}
-                  </p>
-                  <p className="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-rose-600 dark:text-rose-300">
-                    {item.meta}
-                  </p>
+                <article
+                  className="card grid gap-4 p-5 sm:grid-cols-[1fr_150px] sm:items-start"
+                  key={`${item.title}-${item.subtitle}`}
+                >
+                  <div>
+                    <Icon
+                      aria-hidden="true"
+                      className="mb-4 size-6 text-[#B4A7D6]"
+                    />
+                    <h3 className="text-lg font-semibold text-slate-950 dark:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                      {item.subtitle}
+                    </p>
+                    <p className="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-rose-600 dark:text-rose-300">
+                      {item.meta}
+                    </p>
+                  </div>
+
+                  <div className="sm:text-right">
+                    <button
+                      className="block overflow-hidden rounded-xl border border-slate-200/80 bg-white transition hover:border-[#B4A7D6]/70 dark:border-white/10"
+                      onClick={() => setSelectedCertificate(item)}
+                      type="button"
+                    >
+                      <Image
+                        alt={`${item.title} certificate`}
+                        className="h-24 w-full object-contain sm:w-[150px]"
+                        height={300}
+                        src={item.certificateImage}
+                        width={450}
+                      />
+                    </button>
+                    <button
+                      className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-slate-700 transition hover:text-[#B4A7D6] dark:text-slate-300 dark:hover:text-[#B4A7D6]"
+                      onClick={() => setSelectedCertificate(item)}
+                      type="button"
+                    >
+                      View certificate
+                      <ExternalLink aria-hidden="true" className="size-4" />
+                    </button>
+                  </div>
                 </article>
               );
             })}
@@ -830,6 +862,60 @@ export function PortfolioPage() {
             </p>
           </footer>
         </section>
+
+        {selectedCertificate ? (
+          <motion.div
+            animate={{ opacity: 1 }}
+            aria-label={`${selectedCertificate.title} certificate preview`}
+            aria-modal="true"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            role="dialog"
+          >
+            <button
+              aria-label="Close certificate preview"
+              className="absolute inset-0 cursor-default"
+              onClick={() => setSelectedCertificate(null)}
+              type="button"
+            />
+            <motion.article
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              className="relative z-10 w-full max-w-5xl rounded-[1.75rem] border border-white/15 bg-white p-3 shadow-2xl shadow-slate-950/40 dark:bg-slate-950"
+              initial={{ opacity: 0, scale: 0.96, y: 16 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+            >
+              <div className="mb-3 flex items-center justify-between gap-4 px-2 pt-1">
+                <div>
+                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#B4A7D6]">
+                    Certificate
+                  </p>
+                  <h3 className="mt-1 text-lg font-semibold text-slate-950 dark:text-white">
+                    {selectedCertificate.title}
+                  </h3>
+                </div>
+                <button
+                  aria-label="Close certificate preview"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-slate-200 text-xl leading-none text-slate-600 transition hover:border-[#B4A7D6] hover:text-[#B4A7D6] dark:border-white/10 dark:text-slate-300"
+                  onClick={() => setSelectedCertificate(null)}
+                  type="button"
+                >
+                  ×
+                </button>
+              </div>
+              <div className="max-h-[78vh] overflow-auto rounded-[1.25rem] bg-slate-100 dark:bg-slate-900">
+                <Image
+                  alt={`${selectedCertificate.title} certificate`}
+                  className="h-auto w-full"
+                  height={900}
+                  priority
+                  src={selectedCertificate.certificateImage}
+                  width={1280}
+                />
+              </div>
+            </motion.article>
+          </motion.div>
+        ) : null}
+
       </div>
     </main>
   );
