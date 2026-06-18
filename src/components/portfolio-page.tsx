@@ -381,8 +381,7 @@ export function PortfolioPage() {
           <div className="grid gap-10 md:grid-cols-[1fr_0.95fr] md:items-center">
             <div className="space-y-5">
               <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">
-                Building Mobile-First Products with Frontend Craft and Delivery
-                Ownership.
+                Software Engineer & Mobile App Developer
               </h3>
               {profile.about.map((paragraph) => (
                 <p

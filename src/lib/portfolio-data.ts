@@ -20,9 +20,8 @@ export const profile = {
   summary:
     "I build production-grade React Native, React, and Next.js experiences, translate Figma into refined interfaces, integrate real APIs, and help teams ship through clear Agile workflows.",
   about: [
-    "Software Engineer with 4+ years of experience building production-level mobile and web applications using React Native, React, Next.js, TypeScript, and NestJS. I work across cross-platform development, API integration, performance optimization, and release-ready user experiences.",
-    "My recent work includes owning mobile feature development, translating Figma designs into polished responsive interfaces, integrating monetization SDKs, building supporting backend APIs, and managing App Store and Google Play release cycles.",
-    "Alongside engineering, I bring Agile coordination experience: facilitating daily stand-ups, translating requirements into Jira tickets, supporting backlog refinement, tracking blockers, and documenting workflows in Confluence. I also use AI-assisted tools like Claude, Codex, ChatGPT, and GitHub Copilot to accelerate delivery and improve code quality.",
+    "I specialize in building performant mobile and web applications using React Native, React, Next.js, and TypeScript. Shipping to the App Store and Google Play is part of my everyday workflow.",
+    "I am passionate about owning features end to end, from translating Figma designs into polished interfaces to wiring up APIs and managing release cycles. Alongside engineering, I bring Agile coordination experience that keeps teams aligned, blockers visible, and delivery on track.",
   ],
   location: "Dhaka, Bangladesh",
   email: "swarnali.roy093@gmail.com",
