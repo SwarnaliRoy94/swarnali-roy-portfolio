@@ -360,7 +360,7 @@ export function PortfolioPage() {
 
       <div className="relative z-10" id="content">
         <section
-          className="container-page flex min-h-[88svh] flex-col items-center justify-center py-24 text-center"
+          className="container-page flex min-h-[100svh] flex-col items-center justify-center pb-24 pt-32 text-center"
           id="top"
         >
           <motion.div
