@@ -156,13 +156,13 @@ function ProjectCarousel({
 
   const showPrevious = () => {
     setActiveIndex((current) =>
-      current === 0 ? images.length - 1 : current - 1,
+      current === 0 ? images.length - 1 : current - 1
     );
   };
 
   const showNext = () => {
     setActiveIndex((current) =>
-      current === images.length - 1 ? 0 : current + 1,
+      current === images.length - 1 ? 0 : current + 1
     );
   };
 
@@ -254,18 +254,27 @@ export function PortfolioPage() {
   const devUrl =
     profile.socials.find((link) => link.label === "DEV")?.href ??
     "https://dev.to/swarnaliroy";
+  const linkedinUrl =
+    profile.socials.find((link) => link.label === "LinkedIn")?.href ??
+    "https://www.linkedin.com/in/royswarnali/";
   const contactLinks = [
     {
-      description: profile.email,
-      href: `mailto:${profile.email}`,
-      icon: Mail,
-      label: "Email",
+      description: "linkedin.com/in/royswarnali/",
+      href: linkedinUrl,
+      icon: DevIcon,
+      label: "LinkedIn",
     },
     {
       description: "github.com/SwarnaliRoy94",
       href: githubUrl,
       icon: GitHubIcon,
       label: "GitHub",
+    },
+    {
+      description: profile.email,
+      href: `mailto:${profile.email}`,
+      icon: Mail,
+      label: "Email",
     },
     {
       description: "dev.to/swarnaliroy",
@@ -280,14 +289,14 @@ export function PortfolioPage() {
         .filter((category) => category.id !== "all")
         .filter(
           (category) =>
-            activeSkillCategory === "all" || category.id === activeSkillCategory,
+            activeSkillCategory === "all" || category.id === activeSkillCategory
         )
         .map((category) => ({
           ...category,
           skills: skills.filter((skill) => skill.category === category.id),
         }))
         .filter((category) => category.skills.length > 0),
-    [activeSkillCategory],
+    [activeSkillCategory]
   );
 
   useEffect(() => {
@@ -299,7 +308,7 @@ export function PortfolioPage() {
       window.history.replaceState(
         null,
         "",
-        `${window.location.pathname}${window.location.search}`,
+        `${window.location.pathname}${window.location.search}`
       );
     }
 
@@ -409,7 +418,6 @@ export function PortfolioPage() {
                 View My Work
               </button>
             </div>
-
           </motion.div>
         </section>
 
@@ -537,7 +545,10 @@ export function PortfolioPage() {
             })}
           </div>
 
-          <motion.div className="grid items-stretch gap-4 md:grid-cols-2" layout>
+          <motion.div
+            className="grid items-stretch gap-4 md:grid-cols-2"
+            layout
+          >
             {visibleSkillGroups.map((group, groupIndex) => (
               <motion.article
                 className="card h-full p-5"
@@ -733,7 +744,7 @@ export function PortfolioPage() {
                           href={project.githubUrl}
                           label={`View ${project.name} on GitHub`}
                         >
-                        <GitHubIcon className="size-5" />
+                          <GitHubIcon className="size-5" />
                         </ProjectAction>
                       ) : null}
                       {project.liveUrl ? (
@@ -779,7 +790,10 @@ export function PortfolioPage() {
               const Icon = item.icon;
 
               return (
-                <article className="card p-5" key={`${item.title}-${item.subtitle}`}>
+                <article
+                  className="card p-5"
+                  key={`${item.title}-${item.subtitle}`}
+                >
                   <Icon
                     aria-hidden="true"
                     className="mb-4 size-6 text-[#B4A7D6]"
@@ -892,7 +906,7 @@ export function PortfolioPage() {
               out. I&apos;m always open to discussing new opportunities.
             </p>
 
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-4">
               {contactLinks.map((link) => {
                 const Icon = link.icon;
                 const isEmail = link.label === "Email";
@@ -915,10 +929,10 @@ export function PortfolioPage() {
                     <h3 className="mt-4 text-lg font-semibold text-slate-950 dark:text-white">
                       {link.label}
                     </h3>
-                    <p className="mt-1.5 break-words text-sm leading-6 text-slate-600 dark:text-slate-300">
+                    <p className="mt-1.5 break-words text-xs leading-6 text-slate-600 dark:text-slate-300">
                       {link.description}
                     </p>
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#B4A7D6]">
+                    <span className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-[#B4A7D6]">
                       {isEmail ? "Send email" : "Visit profile"}
                       <ExternalLink aria-hidden="true" className="size-4" />
                     </span>
@@ -989,7 +1003,6 @@ export function PortfolioPage() {
             </motion.article>
           </motion.div>
         ) : null}
-
       </div>
     </main>
   );
