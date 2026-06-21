@@ -16,7 +16,7 @@ export const profile = {
   name: "Swarnali Roy",
   role: "Senior Software Engineer",
   headline:
-    "React Native and React engineer building production apps, polished interfaces, and release-ready product workflows.",
+    "Senior Software Engineer with 4.5+ years experience of building React Native and React production apps, polished interfaces, and release-ready product workflows.",
   summary:
     "I build production-grade React Native, React, and Next.js experiences, translate Figma into refined interfaces, integrate real APIs, and help teams ship through clear Agile workflows.",
   about: [

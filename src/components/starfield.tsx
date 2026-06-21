@@ -70,22 +70,32 @@ export function Starfield() {
     };
 
     const draw = () => {
+      const isDarkMode = document.documentElement.classList.contains("dark");
+
       context.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
       stars.forEach((star) => {
         const twinkle = reduceMotion.matches
           ? 1
           : 0.7 + Math.sin(frame * 0.035 + star.twinkle) * 0.3;
-        const color =
-          star.hue === "teal"
+        const color = isDarkMode
+          ? star.hue === "teal"
             ? "94,234,212"
             : star.hue === "violet"
               ? "196,181,253"
-              : "255,255,255";
+              : "255,255,255"
+          : star.hue === "teal"
+            ? "37,143,153"
+            : star.hue === "violet"
+              ? "124,106,182"
+              : "155,92,130";
+        const starAlpha = isDarkMode
+          ? star.opacity * twinkle
+          : Math.min(0.82, star.opacity * twinkle * 0.96 + 0.12);
 
-        context.fillStyle = `rgba(${color},${star.opacity * twinkle})`;
-        context.shadowBlur = star.radius > 1.4 ? 9 : 5;
-        context.shadowColor = `rgba(${color},0.65)`;
+        context.fillStyle = `rgba(${color},${starAlpha})`;
+        context.shadowBlur = star.radius > 1.4 ? (isDarkMode ? 9 : 10) : 5;
+        context.shadowColor = `rgba(${color},${isDarkMode ? 0.65 : 0.42})`;
         context.beginPath();
         context.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         context.fill();
@@ -109,6 +119,12 @@ export function Starfield() {
           return;
         }
 
+        const meteorOpacity = isDarkMode
+          ? meteor.opacity
+          : Math.min(0.82, meteor.opacity * 1.65);
+        const meteorHead = isDarkMode ? "255,255,255" : "124,106,182";
+        const meteorCore = isDarkMode ? "94,234,212" : "37,143,153";
+
         const gradient = context.createLinearGradient(
           meteor.x,
           meteor.y,
@@ -116,16 +132,19 @@ export function Starfield() {
           meteor.y - meteor.length * 0.45,
         );
 
-        gradient.addColorStop(0, `rgba(255,255,255,${meteor.opacity})`);
-        gradient.addColorStop(0.25, `rgba(94,234,212,${meteor.opacity})`);
-        gradient.addColorStop(1, "rgba(94,234,212,0)");
+        gradient.addColorStop(0, `rgba(${meteorHead},${meteorOpacity})`);
+        gradient.addColorStop(0.24, `rgba(${meteorCore},${meteorOpacity})`);
+        gradient.addColorStop(1, `rgba(${meteorCore},0)`);
 
+        context.shadowBlur = isDarkMode ? 0 : 10;
+        context.shadowColor = `rgba(${meteorCore},0.35)`;
         context.strokeStyle = gradient;
-        context.lineWidth = 2;
+        context.lineWidth = isDarkMode ? 2 : 2.5;
         context.beginPath();
         context.moveTo(meteor.x, meteor.y);
         context.lineTo(meteor.x + meteor.length, meteor.y - meteor.length * 0.45);
         context.stroke();
+        context.shadowBlur = 0;
 
         if (!reduceMotion.matches) {
           meteor.x -= meteor.speed;
@@ -159,7 +178,7 @@ export function Starfield() {
   return (
     <canvas
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-80 dark:opacity-90"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full opacity-95 dark:opacity-90"
       ref={canvasRef}
     />
   );
