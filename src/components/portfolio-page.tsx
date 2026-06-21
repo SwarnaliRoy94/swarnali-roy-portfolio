@@ -315,7 +315,7 @@ export function PortfolioPage() {
   }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_50%_0%,rgba(45,226,197,0.16),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(244,114,182,0.12),transparent_28%),linear-gradient(180deg,#fbfaf5,#f3f1e9)] text-slate-950 dark:bg-[radial-gradient(circle_at_50%_0%,rgba(45,226,197,0.14),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(168,85,247,0.14),transparent_28%),linear-gradient(180deg,#070b12,#020617_46%,#050816)] dark:text-white">
+    <main className="relative min-h-screen overflow-x-hidden bg-[radial-gradient(circle_at_50%_0%,rgba(45,226,197,0.16),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(244,114,182,0.12),transparent_28%),linear-gradient(180deg,#fbfaf5,#f3f1e9)] text-slate-950 dark:bg-[radial-gradient(circle_at_50%_0%,rgba(45,226,197,0.14),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(168,85,247,0.14),transparent_28%),linear-gradient(180deg,#070b12,#020617_46%,#050816)] dark:text-white">
       <Starfield />
       <div
         aria-hidden="true"
@@ -329,30 +329,32 @@ export function PortfolioPage() {
         Skip to content
       </a>
 
-      <header className="sticky top-0 z-50 border-b border-slate-950/10 bg-stone-50/75 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/70">
+      <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
         <nav
           aria-label="Primary"
-          className="container-page flex h-16 items-center justify-between gap-4"
+          className="mx-auto flex h-20 w-full max-w-7xl items-center gap-6 px-6 sm:px-8 lg:px-12"
         >
           <a
-            className="font-semibold tracking-tight text-slate-950 transition hover:text-teal-700 dark:text-white dark:hover:text-teal-300"
+            className="bg-gradient-to-r from-[#7C6AB6] to-[#258F99] bg-clip-text text-xl font-bold tracking-tight text-transparent transition dark:from-[#B4A7D6] dark:to-[#8BD5DD] md:text-2xl"
             href="#top"
           >
-            Swarnali Roy<span className="text-teal-600 dark:text-teal-300">.</span>
+            Swarnali Roy
           </a>
-          <ul className="hidden items-center gap-1 lg:flex">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <a
-                  className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-950/5 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
-                  href={item.href}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <ThemeSwitcher />
+          <div className="ml-auto flex items-center justify-end gap-4">
+            <ul className="hidden items-center justify-end gap-6 lg:flex">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <a
+                    className="text-base font-medium text-slate-600 transition hover:text-[#7C6AB6] dark:text-slate-300 dark:hover:text-[#8BD5DD]"
+                    href={item.href}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <ThemeSwitcher />
+          </div>
         </nav>
       </header>
 
