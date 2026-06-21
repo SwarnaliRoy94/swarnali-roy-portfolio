@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import {
-  ArrowUpRight,
   ChevronLeft,
   ChevronRight,
   Download,
@@ -104,6 +103,20 @@ function GitHubIcon({ className }: { className?: string }) {
       viewBox="0 0 16 16"
     >
       <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.6 7.6 0 0 1 8 3.87c.68 0 1.36.09 2 .26 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+    </svg>
+  );
+}
+
+function DevIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path d="M7.42 10.05c-.18-.17-.41-.26-.68-.26H5.5v4.42h1.24c.27 0 .5-.09.68-.26.18-.18.27-.42.27-.72v-2.46c0-.3-.09-.54-.27-.72Zm-.83 3.25h-.25v-2.6h.25c.18 0 .27.1.27.3v2c0 .2-.09.3-.27.3ZM11.3 10.7V9.8H8.84v4.42h2.46v-.9H9.68v-.9h.99v-.9h-.99v-.82h1.62Zm3.51-.9-.76 2.94-.77-2.94h-.87l1.18 4.42h.91l1.18-4.42h-.87Z" />
+      <path d="M20.5 3h-17A1.5 1.5 0 0 0 2 4.5v15A1.5 1.5 0 0 0 3.5 21h17a1.5 1.5 0 0 0 1.5-1.5v-15A1.5 1.5 0 0 0 20.5 3ZM18 15.25c0 .41-.34.75-.75.75H6.75A.75.75 0 0 1 6 15.25v-6.5C6 8.34 6.34 8 6.75 8h10.5c.41 0 .75.34.75.75v6.5Z" />
     </svg>
   );
 }
@@ -236,6 +249,32 @@ export function PortfolioPage() {
   const [selectedCertificate, setSelectedCertificate] = useState<
     (typeof certifications)[number] | null
   >(null);
+  const githubUrl =
+    profile.socials.find((link) => link.label === "GitHub")?.href ??
+    "https://github.com/SwarnaliRoy94";
+  const devUrl =
+    profile.socials.find((link) => link.label === "DEV")?.href ??
+    "https://dev.to/swarnaliroy";
+  const contactLinks = [
+    {
+      description: profile.email,
+      href: `mailto:${profile.email}`,
+      icon: Mail,
+      label: "Email",
+    },
+    {
+      description: "github.com/SwarnaliRoy94",
+      href: githubUrl,
+      icon: GitHubIcon,
+      label: "GitHub",
+    },
+    {
+      description: "dev.to/swarnaliroy",
+      href: devUrl,
+      icon: DevIcon,
+      label: "DEV",
+    },
+  ];
   const visibleSkillGroups = useMemo(
     () =>
       skillCategories
@@ -391,6 +430,22 @@ export function PortfolioPage() {
                   {paragraph}
                 </p>
               ))}
+              <div className="flex flex-col justify-center gap-4 pt-4 sm:flex-row md:justify-start">
+                <a
+                  className="inline-flex h-11 items-center justify-center rounded-full bg-[#B4A7D6] px-6 py-2 font-medium text-slate-950 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_18px_rgba(180,167,214,0.45)] active:scale-95"
+                  href="#contact"
+                >
+                  Get In Touch
+                </a>
+                <a
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[#B4A7D6] px-6 py-2 font-medium text-[#B4A7D6] transition-colors duration-300 hover:bg-[#B4A7D6]/10"
+                  download
+                  href={profile.resumeHref}
+                >
+                  Download CV
+                  <Download aria-hidden="true" className="size-4" />
+                </a>
+              </div>
             </div>
 
             <div className="grid gap-5">
@@ -811,45 +866,48 @@ export function PortfolioPage() {
         </Section>
 
         <section className="container-page py-16 md:py-24" id="contact">
-          <div className="card grid gap-8 p-6 md:grid-cols-[1fr_0.75fr] md:p-8">
-            <div>
-              <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.22em] text-teal-700 dark:text-teal-300">
-                Contact
-              </p>
-              <h2 className="text-3xl font-semibold leading-tight text-slate-950 dark:text-white md:text-4xl">
-                Let&apos;s build something clear, useful, and release-ready.
-              </h2>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {profile.socials.map((link) => (
+          <div className="mx-auto max-w-4xl">
+            <h2 className="mb-4 text-center text-3xl font-bold text-slate-950 dark:text-white md:text-4xl">
+              Get In <span className="text-[#B4A7D6]">Touch</span>
+            </h2>
+            <p className="mx-auto mb-12 max-w-2xl text-center text-base leading-7 text-slate-600 dark:text-slate-300">
+              Have a project in mind or want to collaborate? Feel free to reach
+              out. I&apos;m always open to discussing new opportunities.
+            </p>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {contactLinks.map((link) => {
+                const Icon = link.icon;
+                const isEmail = link.label === "Email";
+
+                return (
                   <a
-                    className="inline-flex items-center gap-2 rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-teal-500 hover:text-teal-700 dark:border-white/15 dark:text-slate-200 dark:hover:border-teal-300 dark:hover:text-teal-200"
+                    className="card group relative overflow-hidden p-4 text-center transition duration-300 hover:-translate-y-1 hover:border-[#B4A7D6]/70 hover:shadow-[0_18px_48px_rgba(180,167,214,0.16)]"
                     href={link.href}
-                    key={link.href}
-                    rel="noreferrer"
-                    target="_blank"
+                    key={link.label}
+                    rel={isEmail ? undefined : "noreferrer"}
+                    target={isEmail ? undefined : "_blank"}
                   >
-                    {link.label}
-                    <ArrowUpRight aria-hidden="true" className="size-4" />
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[#B4A7D6] to-transparent opacity-70"
+                    />
+                    <span className="mx-auto flex size-11 items-center justify-center rounded-full bg-[#B4A7D6]/10 text-[#B4A7D6] shadow-[0_0_20px_rgba(180,167,214,0.14)] transition group-hover:bg-[#B4A7D6]/20">
+                      <Icon aria-hidden="true" className="size-5" />
+                    </span>
+                    <h3 className="mt-4 text-lg font-semibold text-slate-950 dark:text-white">
+                      {link.label}
+                    </h3>
+                    <p className="mt-1.5 break-words text-sm leading-6 text-slate-600 dark:text-slate-300">
+                      {link.description}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#B4A7D6]">
+                      {isEmail ? "Send email" : "Visit profile"}
+                      <ExternalLink aria-hidden="true" className="size-4" />
+                    </span>
                   </a>
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col justify-center gap-3">
-              <a
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-teal-300 px-5 text-base font-semibold text-slate-950 shadow-[0_0_34px_rgba(45,226,197,0.2)] transition hover:bg-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-stone-50 dark:focus:ring-offset-slate-950"
-                href={`mailto:${profile.email}`}
-              >
-                Email me
-                <Mail aria-hidden="true" className="size-4" />
-              </a>
-              <a
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-slate-300 px-5 text-base font-semibold text-slate-900 transition hover:border-teal-500 hover:text-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-stone-50 dark:border-white/15 dark:text-white dark:hover:border-teal-300 dark:hover:text-teal-200 dark:focus:ring-offset-slate-950"
-                download
-                href={profile.resumeHref}
-              >
-                Download resume
-                <Download aria-hidden="true" className="size-4" />
-              </a>
+                );
+              })}
             </div>
           </div>
 
