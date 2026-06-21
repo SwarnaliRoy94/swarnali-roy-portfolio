@@ -23,9 +23,8 @@ import {
   projects,
   skillCategories,
   skills,
-  stats,
 } from "@/lib/portfolio-data";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const navItems = [
   { label: "Home", href: "#top" },
@@ -291,6 +290,30 @@ export function PortfolioPage() {
     [activeSkillCategory],
   );
 
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    if (window.location.hash) {
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}${window.location.search}`,
+      );
+    }
+
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ behavior: "auto", left: 0, top: 0 });
+    });
+  }, []);
+
+  function scrollToProjects() {
+    document
+      .getElementById("projects")
+      ?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+  }
+
   return (
     <main className="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_50%_0%,rgba(45,226,197,0.16),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(244,114,182,0.12),transparent_28%),linear-gradient(180deg,#fbfaf5,#f3f1e9)] text-slate-950 dark:bg-[radial-gradient(circle_at_50%_0%,rgba(45,226,197,0.14),transparent_34%),radial-gradient(circle_at_78%_18%,rgba(168,85,247,0.14),transparent_28%),linear-gradient(180deg,#070b12,#020617_46%,#050816)] dark:text-white">
       <Starfield />
@@ -345,12 +368,7 @@ export function PortfolioPage() {
             transition={{ duration: 0.55, ease: "easeOut" }}
             variants={reveal(Boolean(reduceMotion))}
           >
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.24em] text-teal-700 dark:text-teal-300">
-              <MapPin aria-hidden="true" className="mr-2 inline size-4" />
-              {profile.location}
-            </p>
-
-            <div className="mt-6 flex justify-center">
+            <div className="flex justify-center">
               <div className="relative rounded-full p-1.5">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-teal-300 via-violet-400 to-rose-300 opacity-80 blur-sm" />
                 <Image
@@ -365,35 +383,32 @@ export function PortfolioPage() {
             </div>
 
             <div className="mt-7">
-              <h1 className="text-4xl font-semibold leading-[1.05] text-slate-950 dark:text-white md:text-6xl">
-                Swarnali{" "}
-                <span className="bg-gradient-to-r from-teal-500 via-violet-500 to-rose-500 bg-clip-text text-transparent dark:from-teal-200 dark:via-violet-300 dark:to-rose-300">
-                  Roy
-                </span>
+              <h1 className="bg-gradient-to-r from-[#7C6AB6] to-[#258F99] bg-clip-text text-4xl font-semibold leading-[1.05] text-transparent dark:from-[#B4A7D6] dark:to-[#8BD5DD] md:text-6xl">
+                Swarnali Roy
               </h1>
             </div>
 
             <p className="mx-auto mt-4 max-w-3xl text-lg text-slate-600 dark:text-slate-300 md:text-2xl">
               {profile.role} · React Native · React · TypeScript
             </p>
+            <p className="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-teal-700 dark:text-teal-300">
+              <MapPin aria-hidden="true" className="mr-2 inline size-4" />
+              {profile.location}
+            </p>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-700 dark:text-slate-100 md:text-lg">
               {profile.headline}
             </p>
+            <div className="mt-10 flex justify-center">
+              <button
+                className="inline-flex h-10 items-center justify-center rounded-full bg-[#B4A7D6] px-5 py-2 text-sm font-medium text-slate-950 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_18px_rgba(180,167,214,0.45)] active:scale-95"
+                onClick={scrollToProjects}
+                type="button"
+              >
+                View My Work
+              </button>
+            </div>
 
           </motion.div>
-
-          <div className="mt-14 grid w-full max-w-4xl gap-3 border-t border-slate-950/10 pt-6 dark:border-white/10 sm:grid-cols-3">
-            {stats.map((item) => (
-              <div key={item.label}>
-                <p className="text-2xl font-semibold text-slate-950 dark:text-white">
-                  {item.value}
-                </p>
-                <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                  {item.label}
-                </p>
-              </div>
-            ))}
-          </div>
         </section>
 
         <motion.section
@@ -655,9 +670,9 @@ export function PortfolioPage() {
 
         <Section
           description="Selected work chosen to show product context, technical stack, and the kind of ownership behind each build."
-          eyebrow="Selected work"
+          eyebrow="selected work"
           id="projects"
-          title="Projects"
+          title="Featured Projects"
         >
           <div className="grid gap-4 md:grid-cols-2">
             {projects.map((project, index) => {
